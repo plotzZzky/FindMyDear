@@ -1,0 +1,290 @@
+/* App */
+.app-bar {
+  padding: 5px 0;
+  z-index: 999;
+  background-color: var(--color_dark);
+}
+
+.app-bar-align {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap-reverse;
+  gap: 5px 1vw;
+}
+
+.align-categories {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.categories {
+  padding: 2px 10px;
+  color: var(--fontColor_sec);
+  font-weight: bold;
+  font-size: clamp(0.7em, 1.5vw, 1em);
+  position: relative;
+  z-index: 1;
+}
+
+.categories::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  transform-origin: center;
+  transform: scaleX(0);
+  transition: transform .2s ease-in-out;
+  background-color: var(--color_accent);
+  border-radius: 4px;
+  z-index: -1;
+}
+
+.categories:hover::before {
+  transform-origin: center;
+  transform: scaleX(1);
+}
+
+.categories * {
+  color: var(--fontColor_sec);
+}
+
+.app-filter {
+  width: 30vw;
+  height: 2vh;
+  margin: auto 0;
+  outline: none;
+}
+
+/* Cards */
+.cards {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 5vh 1vw 1vh;
+}
+
+.card-margin {
+  flex: 0 1 20%;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  margin: 1vh 0.5vw;
+  padding: 5px;
+  cursor: pointer;
+  background-color: snow;
+  box-shadow: var(--shadow);
+}
+
+.card-pic {
+  width: 100%;
+  height: 100%; 
+  object-fit: fill;
+  aspect-ratio: 1/1.2;
+}
+
+.card-name {
+  color: var(--color_dark);
+  font-weight: bold;
+  font-size: clamp(0.8em, 1.5vw, 1.2em);
+  margin: 1vh 5px 5px;
+}
+
+.card-sex,
+.card-agegroup {
+  display: none;
+}
+
+/* Modal */
+.modal-background {
+  visibility: hidden;
+  position: fixed;
+  inset: 0;
+  z-index: 999;
+  background-color: #000000f5;
+}
+
+.modal {
+  width: 90vw;
+  max-width: 700px;
+  margin: 1% auto auto;
+  padding: 1vh 0.5vw;
+  min-height: 40vh;
+  display: flex;
+  flex-direction: column;
+  background-image: var(--background);
+}
+
+.save-btn {
+  padding: 1.2vh 2vw;
+  font-size: clamp(0.9em, 2vw, 1.2em);
+}
+
+/* ModalNewProfile */
+.align-inputs {
+  margin: 0 2vw;
+  display: flex;
+  flex-direction: column;
+  gap: 1vh 0;
+}
+
+.align-imgs {
+  display: flex;
+  flex-direction: column;
+}
+
+.select-image {
+  visibility: hidden;
+}
+
+.preview-img {
+  width: 240px;
+  height: 240px;
+  margin: 0 auto;
+  cursor: pointer;
+  border: 1px solid lightgrey;
+  border-radius: 50%;
+}
+
+select, 
+.text-input {
+  margin: 0;
+  padding: 4px 5px;
+  border: 1px solid lightgrey;
+  background-color: snow;
+}
+
+textarea {
+  height: 10vh;
+  resize: none;
+  background-color: transparent;
+  border: 1px solid lightgrey;
+  outline: none;
+  overflow-y: auto;
+}
+
+/* Profile */
+.profile-page {
+  display: flex;
+  flex-direction: row;
+}
+
+.page-side {
+  flex: 0 1 40%;
+  margin: 1vh 2px 2px;
+  border: 1px solid lightgray;
+}
+
+.align-profile {
+  display: flex;
+  flex-direction: column;
+}
+
+.profile-pic {
+  width: calc(100% - 4px);
+  height: 70vh;
+  margin: 2px;
+  object-fit: fill;
+  background-color: white;
+}
+
+.profile-name {
+  font-size: clamp(1em, 1.5vw, 1.4em);
+  color: var(--fontColor_pri);
+  font-weight: bold;
+}
+
+.profile-age {
+  font-size: clamp(0.9em, 1.5vw, 1.1em);
+  font-weight: bold;
+  color: rgb(77, 77, 77);
+}
+
+.profile-location {
+  width: calc(100% - 10px);
+  margin: 2px;
+  padding: 2px;
+  border: 1px solid lightgray;
+  background-color: white;
+}
+
+.profile-desc {
+  min-height: 8vh;
+  width: calc(100% - 6px);
+  margin: 2px;
+  border: 1px solid lightgray;
+  background-color: white;
+}
+
+/* Comments */
+.comments {
+  height: 95vh;
+  overflow: auto;
+}
+
+.comment-card {
+  margin: 2px;
+  padding: 3px;
+  width: calc(100% - 12px);
+  display: flex;
+  flex-direction: column;
+  border: 1px solid lightgray;
+}
+
+.comment-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.comment-input {
+  padding: 5px;
+  margin: 2px;
+  width: calc(100% - 16px);
+  border: 1px solid lightgray;
+  resize: none;
+  overflow: none;
+  background-color: white;
+}
+
+@media screen and (max-width: 1072px) {
+  .align-cards {
+    margin-top: 9vh;
+  }
+
+  .card-margin {
+    flex: 0 1 25%;
+  }
+}
+
+@media screen and (max-width: 690px) {
+  .align-cards {
+    margin-top: 11vh;
+  }
+
+  .card-margin {
+    flex: 0 1 33.33%;
+  }
+}
+
+@media screen and (max-width: 550px) {
+
+  .card-margin {
+    flex: 0 0 50%;
+  }
+
+  .categories {
+    font-size: 0;
+  }
+
+  .align-cards {
+    margin-top: 10vh;
+  }
+
+  .modal-btn {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+}
