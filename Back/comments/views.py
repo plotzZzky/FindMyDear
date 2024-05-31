@@ -38,10 +38,14 @@ class CommentView(ModelViewSet):
 
     def destroy(self, request, *args, **kwargs):
         """ Apaga um comentario """
-        comment_id = kwargs['pk']
+        try:
+            comment_id = kwargs['pk']
 
-        comment = CommentProfile.objects.get(pk=comment_id)
-        comment.delete()
-        serializer = self.get_serializer(comment.profile.comments, many=True)
-
-        return Response(serializer.data, status=status.HTTP_200_OK)
+            comment = CommentProfile.objects.get(pk=comment_id, user=request.user)
+            comment.delete()
+            serializer = self.get_serializer(comment.profile.comments, many=True)
+            return Response(serializer.data, status=status.HTTP_200_OK)
+        except CommentProfile.DoesNotExist:  # type:ignore
+            return Response(
+                {"error": "Não foi possivel deletar esse comentario"}, status=status.HTTP_400_BAD_REQUEST
+            )

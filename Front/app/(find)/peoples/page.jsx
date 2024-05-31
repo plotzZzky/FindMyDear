@@ -1,8 +1,8 @@
 'use client'
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
-import ProfileCard from "@comps/profiles/profileCard";
-import ModalNewProfile from "@comps/profiles/modalProfile";
+import ProfileCard from "@/app/components/profileCard";
+import ModalNewPeople from "@/app/components/peoples/modalNewPeople";
 import { useAuth } from '@comps/authContext'
 
 export default function FindPeople() {
@@ -13,7 +13,7 @@ export default function FindPeople() {
 
   // Busca as informações dos cards no back
   function getAllCards() {
-    const url = "http://127.0.0.1:8000/profiles/";
+    const url = "http://127.0.0.1:8000/peoples/";
 
     const data = {
       method: 'GET'
@@ -45,7 +45,7 @@ export default function FindPeople() {
         {getCards}
       </div>
 
-    <ModalNewProfile update={getAllCards}></ModalNewProfile>
+    <ModalNewPeople update={getAllCards}></ModalNewPeople>
     </div>
   )
 }

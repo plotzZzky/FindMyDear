@@ -42,11 +42,10 @@ body {
 }
 
 /* content */
-.page,
 .page-home {
   margin: 0;
-  padding: 4vh 2vw 1vh;
-  min-height: 95vh;
+  padding: 8vh 2vw 1vh;
+  min-height: 91vh;
 }
 
 .page {
@@ -128,21 +127,6 @@ button::before {
 button:hover::before {
   transform-origin: center;
   transform: scaleX(1);
-}
-
-/* benefits */
-.benefits {
-  text-align: left;
-  padding: 0 2vw;
-}
-
-.topic {
-  font-weight: bold;
-  font-size: clamp(1em, 2vw, 1.3em);
-}
-
-.answer {
-  margin-left: 10vw;
 }
 
 /* FAQ */

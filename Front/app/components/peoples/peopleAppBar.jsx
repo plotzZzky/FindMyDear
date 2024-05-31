@@ -1,6 +1,6 @@
 'use client'
 import { useRouter } from "next/navigation"
-import { useAuth } from "./authContext"
+import { useAuth } from "../authContext"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faPerson, faPersonDress, faPersonCane, faBaby, faUsers, faUserPlus } from "@fortawesome/free-solid-svg-icons"
 
@@ -30,19 +30,19 @@ export default function PeopleAppBar() {
   }
 
   function showMan() {
-    baseShowCardByCategorie(".card-sex", 'true')
+    baseShowCardByCategorie(".card-option1", 'true')
   }
 
   function showWoman() {
-    baseShowCardByCategorie(".card-sex", 'false')
+    baseShowCardByCategorie(".card-option1", 'false')
   }
 
   function showChildren() {
-    baseShowCardByCategorie(".card-agegroup", "criança")
+    baseShowCardByCategorie(".card-option2", "criança")
   }
 
   function showElderly() {
-    baseShowCardByCategorie(".card-agegroup", "idoso")
+    baseShowCardByCategorie(".card-option2", "idoso")
   }
 
   function showAllCards() {

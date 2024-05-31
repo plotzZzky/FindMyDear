@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useAuth } from '@comps/authContext'
 
-export default function ModalNewProfile(props) {
+export default function ModalNewPeople(props) {
   let clear = false;  // Atualiza os campos apos fechar o modal
   const [token, updateToken] = useAuth();
 
@@ -47,7 +47,7 @@ export default function ModalNewProfile(props) {
   }
 
   function createProfile() {
-    const url = 'http://127.0.0.1:8000/profiles/';
+    const url = 'http://127.0.0.1:8000/peoples/';
     const form = new FormData();
 
     form.set('enctype', 'multipart/form-data');
@@ -128,7 +128,7 @@ export default function ModalNewProfile(props) {
             <input type="file" className="select-image" id='selectImgUser' onChange={changeImage}></input>
           </div>
 
-          <input type="text" className="text-input" placeholder="Nome compleo" value={getName} onChange={updateName}/>
+          <input type="text" className="text-input" placeholder="Nome completo" value={getName} onChange={updateName}/>
           <input type="date" className="text-input" placeholder="Data de nascimento" value={getAge} onChange={updateAge}/>
 
           <select onChange={e => updateSex(e)}>

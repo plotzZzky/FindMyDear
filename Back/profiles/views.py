@@ -3,15 +3,15 @@ from rest_framework.viewsets import ModelViewSet
 from rest_framework import status
 from rest_framework.permissions import IsAuthenticated, AllowAny
 
-from .serializers import SimpleProfileSerializer, PeoplesSerializer
+from .serializers import SimplePeopleSerializer, PeoplesSerializer, SimplePetSerializer, PetSerializer
 from .models import BaseProfile, PeopleModel, PetModel
 
 
 class PeoplesView(ModelViewSet):
     http_method_names = ['get', 'post']
-    serializer_class = SimpleProfileSerializer
+    serializer_class = SimplePeopleSerializer
     permission_classes_by_action = {"list": [AllowAny], "retrieve": [IsAuthenticated],
-                                    "create": [IsAuthenticated], "disable": [IsAuthenticated]}
+                                    "create": [IsAuthenticated]}
 
     def list(self, request, *args):
         """ Retorna uma lista de pessoas desaparecidas """
@@ -23,7 +23,7 @@ class PeoplesView(ModelViewSet):
         """ Retorna o perfil selcionado """
         try:
             profile_id = kwargs['pk']
-            query = BaseProfile.objects.get(pk=profile_id)
+            query = PeopleModel.objects.get(pk=profile_id)
             serializer = PeoplesSerializer(query)
             return Response(serializer.data, status=status.HTTP_200_OK)
         except (ValueError, TypeError, BaseProfile.DoesNotExist):  # type:ignore
@@ -50,9 +50,9 @@ class PeoplesView(ModelViewSet):
 
 class PetsView(ModelViewSet):
     http_method_names = ['get', 'post']
-    serializer_class = SimpleProfileSerializer
+    serializer_class = SimplePetSerializer
     permission_classes_by_action = {"list": [AllowAny], "retrieve": [IsAuthenticated],
-                                    "create": [IsAuthenticated], "disable": [IsAuthenticated]}
+                                    "create": [IsAuthenticated]}
 
     def list(self, request, *args, **kwargs):
         """ Retorna a lista de pets desaparecidos """
@@ -65,7 +65,8 @@ class PetsView(ModelViewSet):
         try:
             profile_id = kwargs['pk']
             query = PetModel.objects.get(pk=profile_id)
-            serializer = PeoplesSerializer(query)
+            serializer = PetSerializer(query)
+            print(serializer.data)
             return Response(serializer.data, status=status.HTTP_200_OK)
         except (ValueError, TypeError, BaseProfile.DoesNotExist):  # type:ignore
             return Response({"error": "Perfil não encontrado"}, status=status.HTTP_400_BAD_REQUEST)
@@ -75,11 +76,13 @@ class PetsView(ModelViewSet):
             picture = request.data.get('picture', "")
             name = request.data['name']
             breed = request.data['breed']
+            specie = request.data['specie']
             telephone = request.data.get('telephone', 'Sem contato')
             desc = request.data['desc']
             location = request.data['location']
-            BaseProfile.objects.create(
-                picture=picture, name=name, breed=breed, telephone=telephone, desc=desc, location=location
+            PetModel.objects.create(
+                picture=picture, name=name, breed=breed, specie=specie, telephone=telephone, desc=desc,
+                location=location
                 )
             return Response({"msg": f"perfil de {name} criado!"}, status=status.HTTP_200_OK)
         except (KeyError, ValueError, TypeError):

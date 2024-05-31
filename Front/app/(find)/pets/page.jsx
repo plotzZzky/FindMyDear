@@ -1,8 +1,8 @@
 'use client'
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
-import ProfileCard from "@comps/profiles/profileCard";
-import ModalNewProfile from "@comps/profiles/modalProfile";
+import ProfileCard from "@comps/profileCard";
+import ModalNewPet from "@/app/components/pets/modalNewPet";
 import { useAuth } from '@comps/authContext'
 
 export default function FindPet() {
@@ -13,7 +13,7 @@ export default function FindPet() {
 
   // Busca as informações dos cards no back
   function getAllCards() {
-    const url = "http://127.0.0.1:8000/profiles/pets/";
+    const url = "http://127.0.0.1:8000/pets/";
 
     const data = {
       method: 'GET'
@@ -45,7 +45,7 @@ export default function FindPet() {
         {getCards}
       </div>
 
-    <ModalNewProfile></ModalNewProfile>
+    <ModalNewPet update={getAllCards}></ModalNewPet>
     </div>
   )
 }

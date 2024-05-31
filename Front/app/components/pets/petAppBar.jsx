@@ -1,6 +1,6 @@
 'use client'
 import { useRouter } from "next/navigation"
-import { useAuth } from "./authContext"
+import { useAuth } from "../authContext"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faUsers, faUserPlus, faDog, faCat } from "@fortawesome/free-solid-svg-icons"
 
@@ -29,21 +29,14 @@ export default function PetAppBar() {
     });
   }
 
-  function showMan() {
-    baseShowCardByCategorie(".card-sex", 'true')
+  function showDog() {
+    baseShowCardByCategorie(".card-option1", 'cachorro')
   }
 
-  function showWoman() {
-    baseShowCardByCategorie(".card-sex", 'false')
+  function showCat() {
+    baseShowCardByCategorie(".card-option1", 'gato')
   }
 
-  function showChildren() {
-    baseShowCardByCategorie(".card-agegroup", "criança")
-  }
-
-  function showElderly() {
-    baseShowCardByCategorie(".card-agegroup", "idoso")
-  }
 
   function showAllCards() {
     // Exibe todos os cards
@@ -69,8 +62,8 @@ export default function PetAppBar() {
       <div className="app-bar-align">
         <input type="text" className="app-filter" onChange={filterCards} placeholder="Buscar pelo nome"></input>
         <div className="align-categories">
-          <span className='categories' key={0} onClick={showMan}> <FontAwesomeIcon icon={faDog}/> Cachorro </span>
-          <span className='categories' key={1} onClick={showWoman}> <FontAwesomeIcon icon={faCat}/> Gato </span>
+          <span className='categories' key={0} onClick={showDog}> <FontAwesomeIcon icon={faDog}/> Cachorro </span>
+          <span className='categories' key={1} onClick={showCat}> <FontAwesomeIcon icon={faCat}/> Gato </span>
           
           <span className="categories" onClick={showAllCards}> <FontAwesomeIcon icon={faUsers}/> Todos </span>
 

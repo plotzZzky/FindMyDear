@@ -1,7 +1,6 @@
 from django.contrib import admin
 
-from .models import BaseProfile, CommentProfile, PetModel
+from .models import PeopleModel, PetModel
 
-admin.site.register(BaseProfile)
-admin.site.register(CommentProfile)
+admin.site.register(PeopleModel)
 admin.site.register(PetModel)

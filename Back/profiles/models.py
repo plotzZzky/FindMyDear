@@ -23,7 +23,8 @@ class BaseProfile(models.Model):
 
 
 class PetModel(BaseProfile):
-    breed = models.CharField()
+    breed = models.CharField(max_length=128)
+    specie = models.CharField(max_length=128, null=True, blank=True)
 
 
 class PeopleModel(BaseProfile):

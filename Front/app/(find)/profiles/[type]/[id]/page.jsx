@@ -9,14 +9,15 @@ export default function Profile() {
   const router = useRouter();
 
   const [Token, updateToken] = useAuth();
-  const [profileData, setProfileData] = useState();
+  const [profileData, setProfileData] = useState({});
   const [getCards, setCards] = useState(); // Cards dos comentarios 
   const [getComment, setComment] = useState();
 
   function recieveUserProfile() {
     // Recebe dados do backend
     const profileId = urlParams.id; // recebe o id do perfil dos parametros da url
-    const url = `http://127.0.0.1:8000/profiles/${profileId}/`;
+    const profileType = urlParams.type;  // Recebe o type de perfil (pessoa/pet)
+    const url = `http://127.0.0.1:8000/${profileType}/${profileId}/`;
 
     const data = {
       method: 'GET'
@@ -28,6 +29,16 @@ export default function Profile() {
         setProfileData(data);
         showComments(data.comments);
       });
+  }
+
+  const CONTACTME = () => {
+    const profileType = urlParams.type;
+    return profileType === 'peoples'? (
+      <span className="contact-alert"> Se encontrar essa pessoa, ligue para {profileData.telephone} </span>
+    ):(
+      <span className="contact-alert"> Se encontrar esse pet, ligue para {profileData.telephone} </span>
+    )
+    
   }
 
   function showComments(value) {
@@ -84,22 +95,25 @@ export default function Profile() {
   return (
     <>
       <div className='page profile-page'>
-        <div className='page-side'>
+        <div className='page-left'>
             <img src={`http://localhost:8000/${profileData?.picture}`} alt="" className="profile-pic" />
             <div className="align-profile">
               <span className="profile-name"> {profileData?.name} </span>
               <span className="profile-age"> {profileData?.age} </span>
-              <span className="profile-location"> Localização: {profileData?.location} </span>
+              <span className="profile-location"> {profileData?.location} </span>
               <span className="profile-desc"> {profileData?.desc} </span>
             </div>
         </div>
 
-        <div className='page-side' style={{flex: '0 1 60%'}}>
+        <div className='page-right'>
           <div className="comments">
+            {CONTACTME()}
+
             <input type="text" className="comment-input"
               placeholder="Possui alguma informação sobre a localização dessa pessoa?" 
               onKeyDown={submitNewComment} value={getComment} onChange={changeCommentValue}>
             </input>
+
             {getCards}
           </div>
         </div>

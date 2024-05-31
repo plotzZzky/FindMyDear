@@ -5,7 +5,9 @@ export default function ProfileCard(props) {
 
   function showProfile() {
     // Redireciona para pagina do perfil
-    router.push(`/profiles/${props.data.id}`)
+    const profileId = props.data.id
+    const profileType = props.data.man? 'peoples':'pets'
+    router.push(`/profiles/${profileType}/${profileId}`)
   }
 
   return (
@@ -13,8 +15,8 @@ export default function ProfileCard(props) {
       <div className="card" onClick={showProfile}>
         <img src={props.data.picture} alt="" className="card-pic" />
         <span className="card-name">{props.data.name}</span>
-        <span className="card-sex">{props.data.man.toString()}</span>
-        <span className="card-agegroup">{props.data.age_group}</span>
+        <span className="card-option1">{props.data.man?.toString() || props.data.specie}</span>
+        <span className="card-option2">{props.data.age_group || props.data.breed}</span>
       </div>
     </div>
   )

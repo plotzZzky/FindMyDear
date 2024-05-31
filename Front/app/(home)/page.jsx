@@ -14,24 +14,32 @@ export default function Home() {
 
   const FAQ = [
     {
-      question: "A HarmonyTask Network é totalmente gratuita?",
-      answer: "Sim, a HarmonyTask Network é uma plataforma totalmente gratuita. Todos os recursos essenciais estão disponíveis para os usuários sem custos associados."
+      question: "Quem pode utilizar este serviço?",
+      answer: `Para usar a FindMyDear para localizar pessoas e animais perdidos nas enchentes do Rio Grande do Sul, você pode preencher o formulário de registro disponível em nosso site. 
+      Por favor, forneça o máximo de informações possível sobre a pessoa ou animal desaparecido, incluindo detalhes como nome, idade, descrição física, local e data do desaparecimento.`
     },
     {
-      question: "Quais são os serviços oferecidos pela HarmonyTask Network?",
-      answer: "A HarmonyTask Network inclui acesso a uma ampla variedade de profissionais e prestadores de serviços. Você pode explorar, contratar e aproveitar os recursos essenciais sem nenhum custo."
+      question: "Este serviço tem algum custo?",
+      answer: "Não. Nosso serviço é totalmente gratuito e sem fins lucrativos. Nosso objetivo é ajudar a reunir pessoas e animais perdidos com suas famílias, sem qualquer custo para os usuários."
     },
     {
-      question: "Como faço para obter suporte técnico na HarmonyTask Network?",
-      answer: "Para obter suporte técnico na HarmonyTask Network, visite nossa seção de Suporte em nosso site. Nossa equipe está pronta para ajudar a resolver qualquer dúvida ou problema que você possa ter."
+      question: "Como posso usar este serviço para encontrar uma pessoa ou animal perdido?",
+      answer: `Para usar nosso serviço de localização de pessoas e animais perdidos nas enchentes do Rio Grande do Sul, você pode preencher o formulário de registro disponível em nosso site. 
+      Por favor, forneça o máximo de informações possível sobre a pessoa ou animal desaparecido, incluindo detalhes como nome, idade, descrição física, local e data do desaparecimento.`
     },
     {
-      question: "Posso oferecer meus serviços na HarmonyTask Network de forma gratuita?",
-      answer: "Sim, profissionais e prestadores de serviços podem se cadastrar e oferecer seus serviços gratuitamente na HarmonyTask Network. A plataforma é uma comunidade colaborativa onde todos têm a oportunidade de participar."
+      question: "Como faço para relatar uma pessoa ou animal encontrado?",
+      answer: "Crie um perfil com fotos e dados do animal, incluindo onde foi encontrado e seu contato para o dono poder te contatar."
     },
     {
-      question: "Como a HarmonyTask Network garante a qualidade dos profissionais cadastrados?",
-      answer: "A HarmonyTask Network realiza verificações detalhadas para garantir a qualidade e confiabilidade dos profissionais cadastrados. Nossa prioridade é fornecer aos usuários acesso a serviços de alta qualidade."
+      question: "Quem está por trás deste serviço?",
+      answer: `Este serviço foi desenvolvido por uma equipe de voluntários dedicados, em colaboração com organizações locais e comunitárias, para ajudar a reunir pessoas e animais perdidos com suas famílias durante as enchentes do Rio Grande do Sul.
+       Não temos ligações governamentais ou fins lucrativos.`
+    },
+    {
+      question: "Como posso ajudar este serviço?",
+      answer: `Você pode ajudar este serviço de diversas maneiras, como compartilhando informações sobre pessoas e animais desaparecidos em suas redes sociais, oferecendo abrigo temporário para animais perdidos ou fazendo doações para ajudar a manter nossas operações.
+       Entre em contato conosco para obter mais informações sobre como ajudar.`
     },
   ];
 

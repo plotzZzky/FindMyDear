@@ -1,24 +1,31 @@
 from rest_framework.serializers import ModelSerializer
 from datetime import datetime
 
-from .models import BaseProfile
+from .models import PeopleModel, PetModel
 from comments.serializers import CommentSerializer
 
 
-class SimpleProfileSerializer(ModelSerializer):
+class SimplePetSerializer(ModelSerializer):
     """ Serializer simplificado para pagina de buscas """
     class Meta:
-        model = BaseProfile
-        fields = ['id', 'name', 'picture', 'man', 'age']
+        model = PetModel
+        fields = ['id', 'name', 'picture', 'specie', 'breed']
 
 
-class PetsSerializer(ModelSerializer):
+class PetSerializer(ModelSerializer):
     """ Serializa o perfil de um pet """
     comments = CommentSerializer(many=True, source='get_reverse_comments')
 
     class Meta:
-        model = BaseProfile
+        model = PetModel
         fields = '__all__'
+
+
+class SimplePeopleSerializer(ModelSerializer):
+    """ Serializer simplificado para pagina de buscas """
+    class Meta:
+        model = PeopleModel
+        fields = ['id', 'name', 'picture', 'man', 'age']
 
 
 class PeoplesSerializer(ModelSerializer):
@@ -26,7 +33,7 @@ class PeoplesSerializer(ModelSerializer):
     comments = CommentSerializer(many=True, source='get_reverse_comments')
 
     class Meta:
-        model = BaseProfile
+        model = PeopleModel
         fields = '__all__'
 
     def to_representation(self, instance):
