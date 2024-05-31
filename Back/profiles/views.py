@@ -10,8 +10,7 @@ from .models import BaseProfile, PeopleModel, PetModel
 class PeoplesView(ModelViewSet):
     http_method_names = ['get', 'post']
     serializer_class = SimplePeopleSerializer
-    permission_classes_by_action = {"list": [AllowAny], "retrieve": [IsAuthenticated],
-                                    "create": [IsAuthenticated]}
+    permission_classes_by_action = {"list": [AllowAny], "retrieve": [AllowAny], "create": [IsAuthenticated]}
 
     def list(self, request, *args):
         """ Retorna uma lista de pessoas desaparecidas """
@@ -47,12 +46,16 @@ class PeoplesView(ModelViewSet):
         except (KeyError, ValueError, TypeError):
             return Response({"error": "Formulario incorreto"}, status=status.HTTP_400_BAD_REQUEST)
 
+    def get_permissions(self):
+        if self.action in self.permission_classes_by_action:
+            return [permission() for permission in self.permission_classes_by_action[self.action]]
+        return [permission() for permission in self.permission_classes]
+
 
 class PetsView(ModelViewSet):
     http_method_names = ['get', 'post']
     serializer_class = SimplePetSerializer
-    permission_classes_by_action = {"list": [AllowAny], "retrieve": [IsAuthenticated],
-                                    "create": [IsAuthenticated]}
+    permission_classes_by_action = {"list": [AllowAny], "retrieve": [AllowAny], "create": [IsAuthenticated]}
 
     def list(self, request, *args, **kwargs):
         """ Retorna a lista de pets desaparecidos """
@@ -66,7 +69,6 @@ class PetsView(ModelViewSet):
             profile_id = kwargs['pk']
             query = PetModel.objects.get(pk=profile_id)
             serializer = PetSerializer(query)
-            print(serializer.data)
             return Response(serializer.data, status=status.HTTP_200_OK)
         except (ValueError, TypeError, BaseProfile.DoesNotExist):  # type:ignore
             return Response({"error": "Perfil não encontrado"}, status=status.HTTP_400_BAD_REQUEST)
@@ -87,3 +89,8 @@ class PetsView(ModelViewSet):
             return Response({"msg": f"perfil de {name} criado!"}, status=status.HTTP_200_OK)
         except (KeyError, ValueError, TypeError):
             return Response({"error": "Formulario incorreto"}, status=status.HTTP_400_BAD_REQUEST)
+
+    def get_permissions(self):
+        if self.action in self.permission_classes_by_action:
+            return [permission() for permission in self.permission_classes_by_action[self.action]]
+        return [permission() for permission in self.permission_classes]

@@ -20,12 +20,12 @@ export default function Footer() {
 
         <p>
           <FontAwesomeIcon icon={faEnvelope}/>
-          <a> contato@FindMyDear.com </a>
+          <a> contato@findmydear.org </a>
         </p>
 
         <p>
           <FontAwesomeIcon icon={faEnvelope}/>
-          <a> equipe@FindMyDear.com </a>
+          <a> equipe@findmydear.org </a>
         </p>
       </div>
 
@@ -34,7 +34,7 @@ export default function Footer() {
 
         <p onClick={goToGitHub}>
           <FontAwesomeIcon icon={faGithub} />
-          <a> GitHub.com/plotzZzky </a>
+          <a> dev@findmydear.org </a>
         </p>
       </div>
     </footer>
