@@ -5,7 +5,7 @@ import { faX, faCheck } from '@fortawesome/free-solid-svg-icons'
 
 export default function InputQuestion(props) {
   function updateLoginTip() {
-    const tip = document.getElementById(props.tip)
+    const tip = document.getElementById('loginTip')
     tip.innerText = "Sua pergunta de recuperação de senha deve ter mais de 3 digitos"
   }
 
@@ -20,6 +20,12 @@ export default function InputQuestion(props) {
     props.question(value)
   }
 
+  const ICON = () => {
+    return props.valid ?
+    <FontAwesomeIcon icon={faCheck} className='icon-input-validate' />
+    : <FontAwesomeIcon icon={faX} className='icon-input' />
+  }
+
   useEffect(() => {
     const fakeEvent = { target: { value: props.value || '' } };
     ValidQuestion(fakeEvent)
@@ -30,11 +36,9 @@ export default function InputQuestion(props) {
       <input className='text-input' type="text" placeholder='Sua pergunta de recuperação de senha'
         onChange={ValidQuestion} onFocus={updateLoginTip} value={props.value}>
       </input>
+
       <span className='input-div-icon'> 
-        {props.valid ?
-          <FontAwesomeIcon icon={faCheck} className='icon-input-validate' /> :
-          <FontAwesomeIcon icon={faX} className='icon-input' />
-        }
+        {ICON()}
       </span>
     </div>
   )

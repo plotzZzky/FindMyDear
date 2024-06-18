@@ -9,8 +9,8 @@ import InputQuestion from '@comps/inputs/inputQuestion';
 import { useAuth } from '@comps/authContext'
 
 export default function Login() {
-  const [getLogin, setLogin] = useState(true);
   const [Token, updateToken] = useAuth();
+  const [getLogin, setLogin] = useState(true);
   const router = useRouter();
 
   const [getUsername, setUsername] = useState("");
@@ -29,7 +29,6 @@ export default function Login() {
   const [AnswerValid, setAnswerValid] = useState(false)
 
   function checkLogin() {
-    console.log(Token)
     if (Token !== null && typeof Token === 'string') {
       router.push("/peoples");
     }
@@ -37,11 +36,7 @@ export default function Login() {
 
   function showLogin() {
     // Alterna entre a pagina de login e registro
-    const login = document.getElementById('loginTab');
-    const signup = document.getElementById('signupTab');
-    login.style.display = getLogin ? 'none' : 'flex'
-    signup.style.display = getLogin ? 'flex' : 'none'
-    setLogin(getLogin ? false : true)
+    setLogin(getLogin? false:true)
   }
 
   function showRecovery() {
@@ -54,7 +49,7 @@ export default function Login() {
     if (Pwd1Valid && UserValid) {
       loginFunc()
     } else {
-      const tip = document.getElementById("LoginTip")
+      const tip = document.getElementById("loginTip")
       tip.innerText = "Prencha os dados de login"
     }
   }
@@ -78,7 +73,7 @@ export default function Login() {
           updateToken(data.token)
           router.push('/peoples')
         } else {
-          const tip = document.getElementById("LoginTip")
+          const tip = document.getElementById("loginTip")
           tip.innerText = data.error
         }
       })
@@ -89,13 +84,13 @@ export default function Login() {
     if (UserValid && EmailValid && Pwd1Valid && Pwd2Valid && Pwd1Valid === Pwd2Valid) {
       SignUpFunc()
     } else {
-      const tip = document.getElementById("SignTip")
+      const tip = document.getElementById("signTip")
       tip.innerText = "Prencha os dados corretamente para se registar"
     }
   }
 
   function SignUpFunc() {
-    // Função para registar um novo usuario, envia o form com as informações (exceto imagem) e recebe o nome randonizado da imagem do usuario
+    // Função para registar um novo usuario
     const url = `http://127.0.0.1:8000/users/register/`
 
     const formData = new FormData();
@@ -114,13 +109,39 @@ export default function Login() {
       .then((res) =>  res.json())
       .then((data) => {
         if (data.token) {
-          sessionStorage.setItem("token", data.token)
+          updateToken(data.token)
           router.push('/peoples')
         } else {
-          const tip = document.getElementById("SignTip")
+          const tip = document.getElementById("signTip")
           tip.innerText = data.msg
         }
       })
+  }
+
+  const SIGNUPBTNS = () => {
+    // Alter entre os btns e inputs necessarios para o login e signup para evitar duplicar codigo
+    return getLogin? (
+      <>
+        <p id='loginTip'> </p>
+
+        <button className='btn-login' onClick={checkIfLoginIsvalid}> Entrar </button>
+
+        <p onClick={showLogin}> Cadastre-se </p>
+      </>
+    ):(
+      <>
+        <InputPwd password={setPwd} valid={Pwd2Valid} setValid={setPwd2Valid} placeholder="Comfirme a senha"></InputPwd>
+        <InputEmail email={setEmail} valid={EmailValid} setValid={setEmailValid}></InputEmail>
+        <InputQuestion question={setQuestion} valid={QuestionValid} setValid={setQuestionValid}></InputQuestion>
+        <InputAnswer answer={setAnswer} valid={AnswerValid} setValid={setAnswerValid}></InputAnswer>
+
+        <p id='loginTip'> </p>
+      
+        <button className='btn-login' onClick={checkIfSignIsValid}> Cadastrar </button>
+
+        <p onClick={showLogin}> Entrar </p>
+      </>
+    )
   }
 
   useEffect(() => {
@@ -128,51 +149,24 @@ export default function Login() {
   }, [])
 
   return (
-    <>
-      <div className='page banner'>
-        <div className="login-page">
-          <div className="login-alert" id='loginAlert'>
-            <a> Você precisa fazer login!</a>
-          </div>
-          <div className='login-div' id='loginTab'>
-            <p className='login-title'> Bem vindo de volta!</p>
+    <div className='page banner'>
+      <div className="login-page">
+        <div className="login-alert" id='loginAlert'>
+          <span> Você precisa fazer login!</span>
+        </div>
 
-            <div className='align-input'>
-              <InputUser username={setUsername} valid={UserValid} setValid={setUserValid} tip='LoginTip'></InputUser>
-              <InputPwd password={setPassword} valid={Pwd1Valid} setValid={setPwd1Valid} placeholder="Digite a senha" tip='LoginTip'></InputPwd>
-            </div>
+        <div className='login-div'>
+          <h2> {getLogin? "Bem vindo de volta!" : "Junte se a nós!" }</h2>
 
-            <a className='login-tip' id='LoginTip'> </a>
+            <InputUser username={setUsername} valid={UserValid} setValid={setUserValid}></InputUser>
+            <InputPwd password={setPassword} valid={Pwd1Valid} setValid={setPwd1Valid} placeholder="Digite a senha"></InputPwd>
 
-            <button className='btn btn-login' onClick={checkIfLoginIsvalid}> Entrar </button>
+            {SIGNUPBTNS()}
 
-            <p className='login-link' onClick={showLogin}> Cadastre-se </p>
-            <p className='login-link' onClick={showRecovery}> Recuperar senha </p>
-          </div>
+          <p onClick={showRecovery}> Recuperar senha </p>
 
-          <div className='login-div' id='signupTab' style={{ display: 'none' }}>
-            <p className='login-title'> Junte-se a nós! </p>
-
-            <div className='align-input'>
-
-              <InputUser username={setUsername} valid={UserValid} setValid={setUserValid} tip='SignTip'></InputUser>
-              <InputEmail email={setEmail} valid={EmailValid} setValid={setEmailValid} tip='SignTip'></InputEmail>
-              <InputPwd password={setPassword} valid={Pwd1Valid} setValid={setPwd1Valid} placeholder="Digite a senha" tip='SignTip'></InputPwd>
-              <InputPwd password={setPwd} valid={Pwd2Valid} setValid={setPwd2Valid} placeholder="Comfirme a senha" tip='SignTip'></InputPwd>
-              <InputQuestion question={setQuestion} valid={QuestionValid} setValid={setQuestionValid} tip='SignTip'></InputQuestion>
-              <InputAnswer answer={setAnswer} valid={AnswerValid} setValid={setAnswerValid} tip='SignTip'></InputAnswer>
-
-            </div>
-
-            <a className='login-tip' id='SignTip'> </a>
-            
-            <button className='btn btn-login' onClick={checkIfSignIsValid}> Cadastrar </button>
-
-            <p className='login-link' onClick={showLogin}> Entrar </p>
-            <p className='login-link' onClick={showRecovery}> Recuperar senha </p>
-          </div>
         </div>
       </div>
-    </>
+    </div>
   )
 }

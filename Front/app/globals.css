@@ -58,7 +58,7 @@ body {
   font-size: clamp(1em, 1.5vw, 1.3em);
 }
 
-.home-align-btns {
+.home-btns {
   width: 50%;
   margin: 5vh auto 0;
   display: flex;
@@ -73,16 +73,13 @@ body {
 
 .big-title * {
   color: var(--color_accent);
+  font-size: clamp(1em, 2vw, 2em);
 }
 
 .subtitle {
   font-size: clamp(1.6em, 4vw, 2.4em);
-  margin-top: -6%;
+  margin-top: -12vh;
   color: var(--color_dark);
-}
-
-.market-icon {
-  font-size: clamp(1em, 2vw, 2em);
 }
 
 h1 {

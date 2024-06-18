@@ -64,12 +64,12 @@ export default function Home() {
   }
 
   return (
-    <div>
+    <>
       <div className='page-home' id='Start'>
-        <h1 className='big-title'> FindMyDear <FontAwesomeIcon icon={faMagnifyingGlassLocation} className='market-icon' /> </h1>
+        <h1 className='big-title'> FindMyDear <FontAwesomeIcon icon={faMagnifyingGlassLocation}/> </h1>
         <h2 className='subtitle'> Plataforma para encontar pessoas e pets perdidos. </h2>
 
-        <div className='home-align-btns'>
+        <div className='home-btns'>
           <button onClick={goToLogin}> Buscar entes queridos </button>
         </div>
       </div>
@@ -84,6 +84,6 @@ export default function Home() {
         <h1> Duvias frequentes: </h1>
         {faqItems()}
       </div>
-    </div>
+    </>
   )
 }

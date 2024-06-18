@@ -7,7 +7,7 @@ export default function InputPwd(props) {
   const [pwdVisible, setPwdVisible] = useState(false)
 
   function updateTipLoginPassword() {
-    const tip = document.getElementById(props.tip)
+    const tip = document.getElementById('loginTip')
     tip.innerText = "A senha precisa de letras, numeros e ao menos 8 digitos"
   }
 
@@ -37,27 +37,31 @@ export default function InputPwd(props) {
     return char && digit;
   }
 
+  const EYESICON = () => {
+    return pwdVisible? 
+    <FontAwesomeIcon icon={faEyeSlash}></FontAwesomeIcon>
+    : <FontAwesomeIcon icon={faEye}></FontAwesomeIcon>
+  }
+
+  const ICON = () => {
+    return props.valid ?
+    <FontAwesomeIcon icon={faCheck} className='icon-input-validate' />
+    : <FontAwesomeIcon icon={faX} className='icon-input' />
+  }
+
   return (
     <div className='div-input'>
       <input
         className='text-input' type={pwdVisible? 'text': 'password'} name='password' 
-        placeholder={props.placeholder} min={8}
-        onChange={validatePwd} 
-        onFocus={updateTipLoginPassword} >
+        placeholder={props.placeholder} min={8} onChange={validatePwd} onFocus={updateTipLoginPassword} >
       </input>
 
       <div className='pwd-visible' onClick={changePwdVisibility}>
-        { pwdVisible? 
-          <FontAwesomeIcon icon={faEyeSlash}></FontAwesomeIcon> :
-          <FontAwesomeIcon icon={faEye}></FontAwesomeIcon>
-        }
+        {EYESICON()}
       </div>
 
       <div className='input-div-icon'>
-        {props.valid ?
-          <FontAwesomeIcon icon={faCheck} className='icon-input-validate' /> :
-          <FontAwesomeIcon icon={faX} className='icon-input' />
-        }
+        {ICON()}
       </div>
     </div>
   )

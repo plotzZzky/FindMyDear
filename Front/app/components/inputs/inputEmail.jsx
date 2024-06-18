@@ -6,7 +6,7 @@ import { faX, faCheck } from '@fortawesome/free-solid-svg-icons'
 export default function InputEmail(props) {
 
   function updateTipLoginPassword() {
-    const tip = document.getElementById(props.tip)
+    const tip = document.getElementById('loginTip')
     tip.innerText = "O email precisa ser valido"
   }
 
@@ -18,6 +18,12 @@ export default function InputEmail(props) {
       props.setValid(false)
     }
     props.email(value)
+  }
+
+  const ICON = () => {
+    props.valid ?
+    <FontAwesomeIcon icon={faCheck} className='icon-input-validate' />
+    : <FontAwesomeIcon icon={faX} className='icon-input' />
   }
 
   useEffect(() => {
@@ -32,11 +38,9 @@ export default function InputEmail(props) {
         className='text-input' type='email' name='email' placeholder='Digite seu email'
         onChange={validateEmail} onFocus={updateTipLoginPassword} value={props.value} >
       </input>
+
       <span className='input-div-icon'>
-        {props.valid ?
-          <FontAwesomeIcon icon={faCheck} className='icon-input-validate' /> :
-          <FontAwesomeIcon icon={faX} className='icon-input' />
-        }
+        {ICON()}
       </span>
     </div>
   )

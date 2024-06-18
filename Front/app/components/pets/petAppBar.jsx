@@ -25,7 +25,7 @@ export default function PetAppBar() {
 
     cards.forEach(item => {
       const query = item.querySelector(select).innerHTML.toLowerCase();
-      item.style.display = query === value? 'flex' : 'none';
+      item.style.display = query === value? 'block' : 'none';
     });
   }
 
